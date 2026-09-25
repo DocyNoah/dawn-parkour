@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+
+# Distribution / packaging
+*.egg-info/
+
+# uv
+uv.lock
+
+# PyCharm
+.idea/
+
+# VSCode
+.vscode/
+
+# MacOS
+.DS_Store
+
+# venv
+.venv/
+
+# .env
+.env
+
+# Output
+output/
+outputs/
+log/
+logs/
+*.log
+runs/
+**wandb**/
+weights/
+ckpt/
+ckpts/
+checkpoint/
+checkpoints/

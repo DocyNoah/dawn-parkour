@@ -1,0 +1,4 @@
+[submodule "IsaacLab"]
+	path = IsaacLab
+	url = https://github.com/isaac-sim/IsaacLab.git
+	branch = release/2.3.0

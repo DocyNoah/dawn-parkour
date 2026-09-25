@@ -1,0 +1,55 @@
+target-version = "py311"
+line-length = 120
+indent-width = 4
+exclude = [
+    ".venv",
+    "IsaacLab",
+    "logs",
+    "outputs",
+]
+
+[format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+
+[lint]
+preview = true
+select = [
+    "F",  # pyflakes
+    "E",  # pycodestyle
+    "W",  # pycodestyle
+    "I",  # isort
+    "UP",  # pyupgrade
+    "ANN",  # flake8-annotations
+    "A",  # flake8-builtins
+    "C4",  # flake8-comprehensions
+    "G",  # flake8-logging-format
+    "Q",  # flake8-quotes
+    "SLF",  # flake8-self
+    "SIM",  # flake8-simplify
+    "TCH",  # flake8-tidy-imports
+    "PD",  # flake8-pandas
+    "RUF",  # ruff-specific-rules
+]
+ignore = [
+    "ANN002",  # missing-type-args
+    "ANN003",  # missing-type-kwargs
+    "ANN204",  # missing-return-type-special-method
+    "ANN401",  # any-type
+    "E402",  # module-import-not-at-top-of-file
+    "SIM108",  # if-else-block-instead-of-if-exp
+    "SIM118",  # use-dict-literal
+]
+
+# dreamer and datasets are third-party-origin; full type annotations deferred
+[lint.per-file-ignores]
+"dawn/rl/networks/dreamer/**/*.py" = ["ANN", "SLF001"]
+"dawn/rl/datasets/*.py" = ["ANN"]
+
+[lint.flake8-annotations]
+mypy-init-return = true
+
+[lint.isort]
+known-third-party = ["isaaclab", "isaaclab_assets", "isaaclab_mimic", "isaaclab_rl", "isaaclab_tasks"]
+known-first-party = ["dawn"]

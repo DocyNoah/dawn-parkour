@@ -1,0 +1,112 @@
+[build-system]
+requires = ["setuptools >= 61.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dawn-parkour"
+version = "0.1.0"
+description = "DAWN: noise-robust quadruped parkour with a depth-denoising world model"
+readme = { file = "README.md", content-type = "text/markdown"}
+requires-python = ">= 3.11"
+license-files = ["LICENSE"]
+authors = [
+  { name="Yohan Choi", email="yoweif@koreatech.ac.kr" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "torch>=2.7.0",
+    "torchvision>=0.22.0",
+    "isaaclab",
+    "isaaclab_assets",
+    "isaaclab_mimic",
+    "isaaclab_rl",
+    "isaaclab_tasks",
+    "gymnasium",
+    "GitPython>=3.1.50,<4",
+    "kornia>=0.7.0",
+    "numpy",
+    "hydra-core",
+    "wandb",
+    "h5py",
+    "six==1.17.0",
+    "ruamel.yaml",
+    "scipy",
+    "tensorboard",
+    "typeguard==4.5.1",
+    "tyro==1.0.13",
+    "warp-lang==1.12.0",
+    "pyyaml",
+]
+
+[project.optional-dependencies]
+cu126 = [
+    "torch",
+    "torchvision",
+]
+cu128 = [
+    "torch==2.7.0",
+    "torchvision==0.22.0",
+]
+cu130 = [
+    "torch>=2.9.0",
+    "torchvision>=0.24.0",
+]
+
+[tool.uv]
+python-preference = "only-managed"
+conflicts = [
+    [
+        { extra = "cu126" },
+        { extra = "cu128" },
+        { extra = "cu130" },
+    ],
+]
+
+[tool.uv.extra-build-dependencies]
+flatdict = ["setuptools<82"]
+
+[tool.uv.sources]
+isaaclab = { path = "IsaacLab/source/isaaclab", editable = true }
+isaaclab_assets = { path = "IsaacLab/source/isaaclab_assets", editable = true }
+isaaclab_mimic = { path = "IsaacLab/source/isaaclab_mimic", editable = true }
+isaaclab_rl = { path = "IsaacLab/source/isaaclab_rl", editable = true }
+isaaclab_tasks = { path = "IsaacLab/source/isaaclab_tasks", editable = true }
+torch = [
+    { index = "pytorch-cu126", extra = "cu126" },
+    { index = "pytorch-cu128", extra = "cu128" },
+    { index = "pytorch-cu130", extra = "cu130" },
+]
+torchvision = [
+    { index = "pytorch-cu126", extra = "cu126" },
+    { index = "pytorch-cu128", extra = "cu128" },
+    { index = "pytorch-cu130", extra = "cu130" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[[tool.uv.index]]
+name = "nvidia"
+url = "https://pypi.nvidia.com"
+explicit = false
+
+[tool.setuptools.packages.find]
+include = ["dawn*"]
+
+[tool.setuptools.package-data]
+dawn = ["datasets/mocap_motions/*.txt"]
